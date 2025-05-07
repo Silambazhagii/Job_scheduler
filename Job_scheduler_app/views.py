@@ -20,3 +20,11 @@ def create_interview(request):
         form = InterviewSlotForm()
 
     return render(request, 'create_interview.html', {'form': form})
+
+
+def navbar(request):
+    return render(request, 'navbar.html')
+
+
+def home(request):
+    return render(request, 'home.html')

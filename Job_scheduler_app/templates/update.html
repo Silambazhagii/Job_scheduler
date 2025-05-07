@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Assignment</title>
+</head>
+<body>
+    <h1>Update Assignment</h1>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Applicant Information</h2>
+        {{ applicant_form.as_p }}
+        <h2>Interview Slot Information</h2>
+        {{ slot_form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
