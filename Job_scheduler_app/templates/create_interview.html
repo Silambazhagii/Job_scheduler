@@ -2,99 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Interview Slot</title>
+    <title>Schedule Interview - Job Scheduler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fafc;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
         }
 
-        /* Animation for form appearance */
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Button hover animation */
-        .btn-hover:hover {
-            transform: scale(1.05);
-            background-color: #2b6cb0;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* Focus animation for input fields */
-        input:focus, textarea:focus {
-            border-color: #3182ce;
-            box-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="min-h-screen text-white">
 
-    <!-- Main Container (Landscape Orientation) -->
-    <div class="min-h-screen flex justify-center items-center px-8 py-16 fade-in">
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-40 p-4 shadow-md">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-cyan-400">
+                <a href="/">🗓️ Job Scheduler</a>
+            </div>
+            <div class="space-x-6 text-white text-lg">
+                <a href="/" class="hover:text-cyan-400">Home</a>
+                <a href="/schedule/" class="hover:text-cyan-400">Schedule</a>
+                <a href="#" class="hover:text-cyan-400">About</a>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Form Card (Landscape) -->
-        <div class="bg-white p-8 rounded-lg shadow-2xl w-full sm:w-2/3 md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <!-- Form Container -->
+    <div class="flex justify-center items-center py-16 px-4 fade-in">
+        <div class="w-full max-w-3xl bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-2xl">
 
-            <!-- Heading -->
-            <h1 class="text-4xl font-extrabold text-center text-blue-700 mb-6">Add Interview Slot</h1>
-            <p class="text-center text-gray-500 mb-6">Please fill in the details to schedule an interview.</p>
+            <h2 class="text-4xl font-bold text-cyan-300 mb-4 text-center">Schedule an Interview</h2>
+            <p class="text-center text-gray-200 mb-6">Fill in the details to schedule the interview.</p>
 
-            <!-- Form -->
             <form method="POST" class="space-y-6">
                 {% csrf_token %}
 
-                <!-- Horizontal Layout (Landscape) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Two-column responsive grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                     <!-- Candidate Name -->
-                    <div class="space-y-2">
-                        <label for="id_candidate_name" class="text-lg font-medium text-gray-700">Candidate Name</label>
-                        <input type="text" name="candidate_name" id="id_candidate_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="Enter Candidate Name" value="{{ form.candidate_name.value }}">
+                    <div>
+                        <label for="id_candidate_name" class="block mb-2 text-lg font-medium">Candidate Name</label>
+                        <input type="text" name="candidate_name" id="id_candidate_name"
+                               class="w-full p-3 rounded-lg bg-gray-100 text-black focus:ring-2 focus:ring-cyan-400"
+                               placeholder="Enter Candidate Name"
+                               value="{{ form.candidate_name.value }}">
                     </div>
 
                     <!-- Job Role -->
-                    <div class="space-y-2">
-                        <label for="id_job_role" class="text-lg font-medium text-gray-700">Job Role</label>
-                        <input type="text" name="job_role" id="id_job_role" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="Enter Job Role" value="{{ form.job_role.value }}">
+                    <div>
+                        <label for="id_job_role" class="block mb-2 text-lg font-medium">Job Role</label>
+                        <input type="text" name="job_role" id="id_job_role"
+                               class="w-full p-3 rounded-lg bg-gray-100 text-black focus:ring-2 focus:ring-cyan-400"
+                               placeholder="Enter Job Role"
+                               value="{{ form.job_role.value }}">
                     </div>
 
                     <!-- Interview Date -->
-                    <div class="space-y-2">
-                        <label for="id_interview_date" class="text-lg font-medium text-gray-700">Interview Date</label>
-                        <input type="date" name="interview_date" id="id_interview_date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" value="{{ form.interview_date.value }}">
+                    <div>
+                        <label for="id_interview_date" class="block mb-2 text-lg font-medium">Interview Date</label>
+                        <input type="date" name="interview_date" id="id_interview_date"
+                               class="w-full p-3 rounded-lg bg-gray-100 text-black focus:ring-2 focus:ring-cyan-400"
+                               value="{{ form.interview_date.value }}">
                     </div>
 
                     <!-- Interview Time -->
-                    <div class="space-y-2">
-                        <label for="id_interview_time" class="text-lg font-medium text-gray-700">Interview Time</label>
-                        <input type="time" name="interview_time" id="id_interview_time" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" value="{{ form.interview_time.value }}">
+                    <div>
+                        <label for="id_interview_time" class="block mb-2 text-lg font-medium">Interview Time</label>
+                        <input type="time" name="interview_time" id="id_interview_time"
+                               class="w-full p-3 rounded-lg bg-gray-100 text-black focus:ring-2 focus:ring-cyan-400"
+                               value="{{ form.interview_time.value }}">
                     </div>
 
-                    <!-- Notes -->
-                    <div class="space-y-2 col-span-2">
-                        <label for="id_notes" class="text-lg font-medium text-gray-700">Additional Notes</label>
-                        <textarea name="notes" id="id_notes" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" rows="4" placeholder="Add any special instructions or notes">{{ form.notes.value }}</textarea>
+                    <!-- Notes (Full width) -->
+                    <div class="md:col-span-2">
+                        <label for="id_notes" class="block mb-2 text-lg font-medium">Additional Notes</label>
+                        <textarea name="notes" id="id_notes" rows="4"
+                                  class="w-full p-3 rounded-lg bg-gray-100 text-black focus:ring-2 focus:ring-cyan-400"
+                                  placeholder="Add any notes or instructions">{{ form.notes.value }}</textarea>
                     </div>
 
                 </div>
 
-                <!-- Error Messages -->
+                <!-- Error Handling -->
                 {% if form.errors %}
                     <div class="bg-red-100 text-red-700 p-4 rounded-lg">
                         <ul>
@@ -108,13 +107,14 @@
                 {% endif %}
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg btn-hover transition-all duration-300">
-                    Schedule Interview
-                </button>
+                <div class="pt-4">
+                    <button type="submit"
+                            class="w-full bg-cyan-400 hover:bg-cyan-500 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                        Schedule Interview
+                    </button>
+                </div>
             </form>
         </div>
-
     </div>
-
 </body>
 </html>
